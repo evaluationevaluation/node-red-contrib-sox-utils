@@ -280,6 +280,10 @@ module.exports = function(RED) {
                             node.inputRate = msg.rate;
                         }
                         spawnPlayStream();
+                        // without the following line my NodeRed on RPI400 did not play streams (coming from pico2wave node)
+                        // sox always compained empty stream...
+                        writeStdin(msg.payload);
+                        // end of patch
                     } else {
                         writeStdin(msg.payload);
                     }
